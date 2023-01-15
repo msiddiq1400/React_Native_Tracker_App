@@ -1,11 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native';
 import {Context as AuthContext} from '../context/AuthContext';
 import { AuthForm } from '../components/AuthForm';
 import TextLink from '../components/TextLink';
 
 const SignupScreen = () => {
-  const {state, signup} = useContext(AuthContext);
+  const {state, signup, clearErrorMessage} = useContext(AuthContext);
+
+  useEffect(() => {
+    clearErrorMessage();
+  }, [])
 
   return (
     <View style={styles.container}>

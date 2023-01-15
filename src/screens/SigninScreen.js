@@ -1,16 +1,21 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthForm } from '../components/AuthForm'
 import TextLink from '../components/TextLink'
-import {Context as AuthContext} from '../context/AuthContext';
+import {Context as AuthContext} from '../context/AuthContext'
 
 const SigninScreen = () => {
-  const {state, signin} = useContext(AuthContext);
+  const {state, signin, clearErrorMessage, tryLocalSignin} = useContext(AuthContext);
+
+  useEffect(() => {
+    clearErrorMessage();
+    tryLocalSignin();
+  }, [])
 
   return (
     <View style={styles.container}>
         <AuthForm
-          headerText="Sign in for Tracker"
+          headerText="Sign In to Your Account"
           errorMessage={state.errorMessage}
           submitButtonText="Sign in"
           onSubmit={signin}
